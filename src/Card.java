@@ -1,66 +1,85 @@
 
 public class Card {
-	private int rank;//represents the rank of a card
-	private int suit;//represents the suit of a card
-	private int value;//represents the value of a card
-	private static String[] ranks = {"Ace","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Jack","Queen","King"};
-	private static String[] suits = {"Clubs","Diamonds","Hearts","Spades"};
+	private String rank; //represents the rank of a card
+	private String suit; //represents the suit of a card
+	private int value; //represents the value of a card
+	public static String[] ranks = {"Ace","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Jack","Queen","King"};
+	public static String[] suits = {"Clubs","Diamonds","Hearts","Spades"};
 	
-	//empty constructor
-	Card(){
-	    }
-	//constructor with two parameters
-	Card(int suit, int values)
-	{
-	    this.rank=values;
-	    this.suit=suit;
+	/**
+	 * Empty constructor.
+	 */
+	public Card(){
+		
 	}
-	/*
-	 * Returns the string version of a card.
+	
+	/**
+	 * Two parameter constructor for Card class.
+	 * @param suit - the suit of the card; can be "Clubs","Diamonds","Hearts", or "Spades".
+	 * @param values - the value of the card; can range 1-10.
+	 */
+	public Card(String rank, String suit)
+	{
+	    this.rank = rank.toUpperCase();
+	    for (int i = 0; i < ranks.length; i++) {
+	    	if (rank.equalsIgnoreCase(ranks[i])) {
+	    		this.value = getValue(i);
+	    	}
+	    }
+	    
+	    this.suit = suit.toUpperCase();
+	}
+	
+	/**
+	 * Overrides Default Object toString method
 	 */
 	public String toString()
 	{
-	    return ranks[rank]+" of "+suits[suit];
+	    return this.rank + " of " + this.suit;
 	}
-	/*
-	 * Sets the value of a card.
+	
+	/**
+	 * Gets the rank of the card;
+	 * @return the rank of the card.
 	 */
-	public int getRank()
+	public String getRank()
 	{
-	    return rank;
+	    return this.rank;
 	}
-	/*
-	 * Gets the suit of a card.
+	
+	/**
+	 * Gets the suit of the card.
+	 * @return the suit of the card.
 	 */
-	public int getSuit()
+	public String getSuit()
 	{
-	    return suit;
+	    return this.suit;
 	}
-	/*
-	 * Gets the value of a card.
+	
+	/**
+	 * Gets the value of the card: 2 - 11;
+	 * @return the real blackjack value of the card.
 	 */
-	public int getValue()
+	public int getValue(final int i)
 	{
-	    if(rank>=10)
-	    {
-	        value=10;
+	    if (i >= 10) {
+	    	this.value = 10; //face cards are all 10
+	    } else if (i == 1) {
+	        this.value = 11; //ace starts at 11 
+	    } else {
+	        this.value = i;
 	    }
-	    else if(rank==1)
-	    {
-	        value=11;
-	    }
-	    else
-	    {
-	        value=rank;
-	    }
-	    return value;
+	    
+	    return this.value;
 	}
-	/*
-	 * Sets the value of a card.
+	
+	/**
+	 * Sets the value of the card.
+	 * @param set - the value to set the card to.
 	 */
-	public void setValue(int set)
+	public void setValue(int value)
 	{
-	    value = set;
+	    this.value = value;
 	}
 	
 }
