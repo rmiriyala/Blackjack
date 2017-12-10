@@ -2,7 +2,7 @@
 public class Dealer {
 	public int cardsValue;
 	public int aceCount;
-	public Card[] hand;
+	public Card[] hand = new Card[12];
 	public int cardCount = 0;
 	public Dealer() {
 			}

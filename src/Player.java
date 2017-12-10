@@ -7,7 +7,6 @@ public class Player {
 	public int cardsValue;
 	public int aceCount;
 	public Card[] hand = new Card[12];
-	public int bet;
 	
 	/**
 	 * Empty player constructor, with default cash given to the new player.
@@ -24,6 +23,13 @@ public class Player {
 		this.hand[this.cardCount] = new Card(newCard);
 		this.cardCount++;
 		this.cardsValue += newCard.getValue();
+	}
+	
+	public boolean checkBlackjack() {
+		if (this.cardsValue == 21) {
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean isBusted() {
