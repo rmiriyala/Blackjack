@@ -3,6 +3,7 @@ public class Dealer {
 	public int cardsValue;
 	public int aceCount;
 	public int cardCount = 0;
+	public boolean limitReached = false;
 	public Card[] hand = new Card[12];
 	
 	
@@ -32,14 +33,13 @@ public class Dealer {
 	
 	public void action(Deck deck) {
 		while(!isBusted()) {
-		if(cardsValue<17) {
-			dealCard(deck);			
+			if(cardsValue<17) {
+				dealCard(deck);			
+			} else {
+				break;
+			}
 		}
-		else { 
-			System.out.println("Dealer stays");
-			break;
-		}
-	}
+		this.limitReached = true;
 	}
 	
 }

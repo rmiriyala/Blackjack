@@ -9,6 +9,7 @@ public class Game {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
 		Deck deck = new Deck();
+		deck.shuffle();
 		int bet = 0;
 		
 		System.out.println("How much do you want to bet?");
@@ -62,6 +63,11 @@ public class Game {
 		}
 		sc.close();
 		
+		while (dealer.limitReached != true) {
+			dealer.action(deck);
+		}
+		
+		winner(player, dealer, bet);
 		
 	}
 	
@@ -81,27 +87,34 @@ public class Game {
 	}
 	
 	public static void winner(Player player, Dealer dealer, int bet) {
+		System.out.println("Player is showing " + player.cardsValue);
 		if (player.isBusted()) {
 			System.out.println("You BUSTED!");
 			player.money -= bet;
 		} else if (dealer.isBusted()) {
+			System.out.println("Dealer is showing " + dealer.cardsValue);
 			System.out.println("Dealer busted. You WIN!");
 			player.money += bet;
 		} else {
 			if (player.cardsValue > dealer.cardsValue) {
+				System.out.println("Dealer is showing " + dealer.cardsValue);
 				System.out.println("You WIN!");
 				player.money += bet;
 			} else if (player.cardsValue < dealer.cardsValue) {
+				System.out.println("Dealer is showing " + dealer.cardsValue);
 				System.out.println("You LOST!");
 				player.money -= bet;
 			} else if (player.cardsValue == dealer.cardsValue) {
 				if (player.cardCount < dealer.cardCount) {
+					System.out.println("Dealer is showing " + dealer.cardsValue);
 					System.out.println("You WIN!");
 					player.money += bet;
 				} else if (player.cardCount > dealer.cardCount){
+					System.out.println("Dealer is showing " + dealer.cardsValue);
 					System.out.println("You LOST!");
 					player.money -= bet;
 				} else {
+					System.out.println("Dealer is showing " + dealer.cardsValue);
 					System.out.println("It's a tie.");
 				}
 			}
