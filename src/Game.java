@@ -14,7 +14,7 @@ public class Game {
 			deck.shuffle();
 			int bet = 0;
 			
-			System.out.println("How much do you want to bet?");
+			System.out.println("You have " + player.money + ". How much do you want to bet?");
 			Scanner sc = new Scanner(System.in);
 			int betAmount = sc.nextInt();
 			
