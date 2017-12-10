@@ -37,6 +37,7 @@ public class Game {
 			sc = new Scanner(System.in);
 			userInput = sc.next().toLowerCase();
 		}
+		sc.close();
 		
 	}
 	
