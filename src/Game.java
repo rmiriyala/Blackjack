@@ -79,6 +79,29 @@ public class Game {
 		player.hand = new Card[12];
 		dealer.hand = new Card[12];
 	}
+	
+	public static void winner(Player player, Dealer dealer, int bet) {
+		if (player.isBusted()) {
+			player.money -= bet;
+			resetGame(player, dealer);
+		} else if (dealer.isBusted()) {
+			player.money += bet;
+			resetGame(player, dealer);
+		} else {
+			if (player.cardsValue > dealer.cardsValue) {
+				player.money += bet;
+				resetGame(player, dealer);
+				} else if (player.cardsValue < dealer.cardsValue) {
+					player.money += bet;
+					resetGame(player, dealer);
+					} else if (player.cardsValue == dealer.cardsValue) {
+						resetGame(player, dealer);
+					}
+			
+		}
+		
+		
+	}
 }
 
 
