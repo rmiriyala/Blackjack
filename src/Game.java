@@ -58,6 +58,7 @@ public class Game {
 			userInput = sc.next().toLowerCase();
 
 
+			if()
 		}
 		sc.close();
 
@@ -76,14 +77,6 @@ public class Game {
 
 	}
 
-	public static void playerBusts(Player player,Dealer dealer,int bet) {
-		resetGame(player, dealer);
-		player.money -= bet;
-	}
-	public static void dealerBusts(Player player,Dealer dealer,int bet) {
-		resetGame(player, dealer);
-		player.money += bet;
-	}
 }
 
 
