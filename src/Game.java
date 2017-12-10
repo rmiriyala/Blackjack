@@ -31,6 +31,8 @@ public class Game {
 		
 		if (player.isBusted() == true) {
 			System.out.println("GAME IS BROKEN");
+			resetGame(player, dealer);
+
 		}
 		System.out.println("Showing: " + player.cardsValue);
 		System.out.println("Would you like to HIT or STAY?");
@@ -44,7 +46,6 @@ public class Game {
 				player.dealCard(deck);
 				if (player.isBusted() == true) {
 					//bust(player); //create bust function in THIS CLASS
-					resetGame(player, dealer);
 					break;
 				}
 			}
