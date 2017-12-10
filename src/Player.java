@@ -7,6 +7,7 @@ public class Player {
 	public int cardsValue;
 	public int aceCount;
 	public Card[] hand = new Card[12];
+	public int bet;
 	
 	/**
 	 * Empty player constructor, with default cash given to the new player.
