@@ -23,7 +23,7 @@ public class Card {
 	    this.rank = rank.toUpperCase();
 	    for (int i = 0; i < ranks.length; i++) {
 	    	if (rank.equalsIgnoreCase(ranks[i])) {
-	    		this.value = getValue(i);
+	    		this.value = getRealValue(i);
 	    	}
 	    }
 	    
@@ -31,10 +31,24 @@ public class Card {
 	}
 	
 	/**
+	 * Copy constructor of another card.
+	 * @param  - card the card to duplicate
+	 */
+	public Card(Card card) {
+		this.rank = card.rank;
+		this.suit = card.suit;
+		this.value = card.value;
+	}
+	
+	/**
 	 * Overrides Default Object toString method
 	 */
 	public String toString()
 	{
+		if (this.equals(null)) {
+			return "null";
+		}
+		
 	    return this.rank + " of " + this.suit;
 	}
 	
@@ -57,20 +71,29 @@ public class Card {
 	}
 	
 	/**
-	 * Gets the value of the card: 2 - 11;
+	 * Helper function gets the real value of the card: 2 - 11;
 	 * @return the real blackjack value of the card.
 	 */
-	public int getValue(final int i)
+	public int getRealValue(final int i)
 	{
-	    if (i >= 10) {
-	    	this.value = 10; //face cards are all 10
-	    } else if (i == 1) {
-	        this.value = 11; //ace starts at 11 
+		int realValue = 0;
+	    if (i + 1 >= 10) {
+	    	realValue = 10; //face cards are all 10
+	    } else if (i == 0) {
+	        realValue = 11; //ace starts at 11 
 	    } else {
-	        this.value = i;
+	        realValue = i + 1;
 	    }
 	    
-	    return this.value;
+	    return realValue;
+	}
+	
+	/**
+	 * Getter method for card value.
+	 * @return the blackjack value of the card.
+	 */
+	public int getValue() {
+		return this.value;
 	}
 	
 	/**
