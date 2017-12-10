@@ -9,7 +9,7 @@ public class Game {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
 		
-		while(true) {
+		while (player.money != 0) {
 			Deck deck = new Deck();
 			deck.shuffle();
 			int bet = 0;
@@ -39,6 +39,12 @@ public class Game {
 			player.dealCard(deck);
 			dealer.dealCard(deck);
 			player.dealCard(deck);
+			
+			if (player.checkBlackjack() == true) {
+				player.money += 1.5 * bet;
+				System.out.println("Blackjack! You WIN!");
+				resetGame(player, dealer);
+			}
 
 			if (player.isBusted() == true) {
 				System.out.println("GAME IS BROKEN");
@@ -63,7 +69,6 @@ public class Game {
 				sc = new Scanner(System.in);
 				userInput = sc.next().toLowerCase();
 			}
-			sc.close();
 			
 			while (dealer.limitReached != true) {
 				dealer.action(deck);
@@ -71,6 +76,7 @@ public class Game {
 			
 			winner(player, dealer, bet);
 		}
+		System.out.println("You have $0. YOU SUCK!");
 		
 	}
 	
@@ -83,8 +89,11 @@ public class Game {
 		
 		player.cardCount = 0;
 		dealer.cardCount = 0;
+		player.cardsValue = 0;
+		dealer.cardsValue = 0;
 		player.aceCount = 0;
 		dealer.aceCount = 0;
+		dealer.limitReached = false;
 		player.hand = new Card[12];
 		dealer.hand = new Card[12];
 	}
@@ -122,10 +131,9 @@ public class Game {
 				}
 			}
 		}
-		
+		System.out.println();
+		System.out.println();
 		resetGame(player, dealer);
-		
-		
 	}
 }
 
