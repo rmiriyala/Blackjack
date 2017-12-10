@@ -21,6 +21,7 @@ public class Game {
 		String userInput = sc.next().toLowerCase();
 		
 		while(userInput.equals("stay") == false) {
+			System.out.println("Showing: " + player.cardsValue);
 			System.out.println("Would you like to HIT or STAY?");
 			
 			sc = new Scanner(System.in);
