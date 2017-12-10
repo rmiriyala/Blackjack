@@ -2,10 +2,14 @@
 public class Dealer {
 	public int cardsValue;
 	public int aceCount;
-	public Card[] hand = new Card[12];
 	public int cardCount = 0;
+	public Card[] hand = new Card[12];
+	
+	
 	public Dealer() {
-			}
+		
+	}
+	
 	public void dealCard(Deck deck) {
 		Card newCard = deck.dealCard();
 		if (newCard.getRank().equalsIgnoreCase("Ace")) {
