@@ -82,23 +82,32 @@ public class Game {
 	
 	public static void winner(Player player, Dealer dealer, int bet) {
 		if (player.isBusted()) {
+			System.out.println("You BUSTED!");
 			player.money -= bet;
-			resetGame(player, dealer);
 		} else if (dealer.isBusted()) {
+			System.out.println("Dealer busted. You WIN!");
 			player.money += bet;
-			resetGame(player, dealer);
 		} else {
 			if (player.cardsValue > dealer.cardsValue) {
+				System.out.println("You WIN!");
 				player.money += bet;
-				resetGame(player, dealer);
-				} else if (player.cardsValue < dealer.cardsValue) {
+			} else if (player.cardsValue < dealer.cardsValue) {
+				System.out.println("You LOST!");
+				player.money -= bet;
+			} else if (player.cardsValue == dealer.cardsValue) {
+				if (player.cardCount < dealer.cardCount) {
+					System.out.println("You WIN!");
 					player.money += bet;
-					resetGame(player, dealer);
-					} else if (player.cardsValue == dealer.cardsValue) {
-						resetGame(player, dealer);
-					}
-			
+				} else if (player.cardCount > dealer.cardCount){
+					System.out.println("You LOST!");
+					player.money -= bet;
+				} else {
+					System.out.println("It's a tie.");
+				}
+			}
 		}
+		
+		resetGame(player, dealer);
 		
 		
 	}
