@@ -17,15 +17,11 @@ public class Game {
 		
 		System.out.println("Showing: " + player.cardsValue);
 		System.out.println("Would you like to HIT or STAY?");
+		
 		Scanner sc = new Scanner(System.in);
 		String userInput = sc.next().toLowerCase();
 		
 		while(userInput.equals("stay") == false) {
-			System.out.println("Showing: " + player.cardsValue);
-			System.out.println("Would you like to HIT or STAY?");
-			
-			sc = new Scanner(System.in);
-			userInput = sc.next().toLowerCase();
 			
 			if (userInput.equals("hit")) {
 				player.dealCard(deck);
@@ -34,7 +30,12 @@ public class Game {
 					break;
 				}
 			}
-			sc.close();
+			
+			System.out.println("Showing: " + player.cardsValue);
+			System.out.println("Would you like to HIT or STAY?");
+			
+			sc = new Scanner(System.in);
+			userInput = sc.next().toLowerCase();
 		}
 		
 	}
