@@ -23,6 +23,7 @@ public class Player {
 		this.hand[this.cardCount] = new Card(newCard);
 		this.cardCount++;
 		this.cardsValue += newCard.getValue();
+		this.printHand();
 	}
 	
 	public boolean checkBlackjack() {
@@ -42,4 +43,15 @@ public class Player {
 		return false;
 	}
 	
+	public void printHand() {
+		if (this.cardCount > 1) {
+			System.out.print("Your hand: ");
+		}
+		for (int i = 0; i < this.cardCount - 1; i++) {
+			System.out.print(this.hand[i].toString() + ", ");
+		}
+		if (this.cardCount > 1) {
+			System.out.println(this.hand[this.cardCount - 1].toString() + ".");
+		}
+	}
 }

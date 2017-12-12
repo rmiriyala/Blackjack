@@ -19,6 +19,9 @@ public class Dealer {
 		this.hand[this.cardCount] = new Card(newCard);
 		this.cardCount++;
 		this.cardsValue += newCard.getValue();
+		if (cardCount == 1) {
+			this.printHand();
+		}
 	}
 	
 	public boolean isBusted() {
@@ -42,4 +45,10 @@ public class Dealer {
 		this.limitReached = true;
 	}
 	
+	public void printHand() {
+		for (int i = 0; i < this.cardCount - 1; i++) {
+			System.out.print(this.hand[i].toString() + ", ");
+		}
+		System.out.println("Dealer: " + this.hand[this.cardCount - 1].toString() + ".");
+	}
 }

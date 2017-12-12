@@ -2,9 +2,6 @@ import java.util.*;
 
 public class Game {
 
-
-
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
@@ -36,52 +33,56 @@ public class Game {
 				betAmount = sc.nextInt();
 			}
 
+			//initial hand is dealt
 			player.dealCard(deck);
 			dealer.dealCard(deck);
 			player.dealCard(deck);
 			
+			//check for blackjack
 			if (player.checkBlackjack() == true) {
 				player.money += 1.5 * bet;
 				System.out.println("Blackjack! You WIN!");
 				resetGame(player, dealer);
 			}
 
+			//should never be true, but resets possible errors
 			if (player.isBusted() == true) {
 				System.out.println("GAME IS BROKEN");
 				resetGame(player, dealer);
 
 			}
 			System.out.println("Showing: " + player.cardsValue);
+			System.out.println();
 			System.out.println("Would you like to HIT or STAY?");
 			
 			sc = new Scanner(System.in);
 			String userInput = sc.next().toLowerCase();
 			
+			//handles user's hit options
 			while(userInput.equals("stay") == false) {
 				if (userInput.equals("hit")) {
+					System.out.println();
 					player.dealCard(deck);
-					if (player.isBusted() == true) {
-						break;
-					}
+					if (player.isBusted() == true) { break; }
 				}
 				System.out.println("Showing: " + player.cardsValue);
+				System.out.println();
 				System.out.println("Would you like to HIT or STAY?");
 				sc = new Scanner(System.in);
 				userInput = sc.next().toLowerCase();
 			}
 			
-			while (dealer.limitReached != true) {
-				dealer.action(deck);
-			}
+			//dealer logic proceeds according to specs in the dealer class
+			while (dealer.limitReached != true) { dealer.action(deck); }
 			
+			//once all actions are done, determines a winner and readies next hand
 			winner(player, dealer, bet);
 		}
-		System.out.println("You have $0. YOU SUCK!");
-		
+		System.out.println("You have $0. GAMER OVER!");
 	}
 	
-	
-	public static void resetGame(Player player, Dealer dealer){
+	//reset all the single game variables
+	public static void resetGame(Player player, Dealer dealer) {
 		player.cardCount = 0;
 		dealer.cardCount = 0;
 		Deck deck = new Deck();
@@ -99,39 +100,57 @@ public class Game {
 	}
 	
 	public static void winner(Player player, Dealer dealer, int bet) {
-		System.out.println("Player is showing " + player.cardsValue);
+		System.out.println();
 		if (player.isBusted()) {
+			System.out.println("Player is showing " + player.cardsValue + ".");
 			System.out.println("You BUSTED!");
 			player.money -= bet;
 		} else if (dealer.isBusted()) {
-			System.out.println("Dealer is showing " + dealer.cardsValue);
+			System.out.print("Player is showing " + player.cardsValue + ": ");
+			player.printHand();
+			System.out.print("Dealer is showing " + dealer.cardsValue + ": ");
+			dealer.printHand();
 			System.out.println("Dealer busted. You WIN!");
 			player.money += bet;
 		} else {
 			if (player.cardsValue > dealer.cardsValue) {
-				System.out.println("Dealer is showing " + dealer.cardsValue);
+				System.out.print("Player is showing " + player.cardsValue + ": ");
+				player.printHand();
+				System.out.print("Dealer is showing " + dealer.cardsValue + ": ");
+				dealer.printHand();
 				System.out.println("You WIN!");
 				player.money += bet;
 			} else if (player.cardsValue < dealer.cardsValue) {
-				System.out.println("Dealer is showing " + dealer.cardsValue);
+				System.out.print("Player is showing " + player.cardsValue + ": ");
+				player.printHand();
+				System.out.print("Dealer is showing " + dealer.cardsValue + ": ");
+				dealer.printHand();
 				System.out.println("You LOST!");
 				player.money -= bet;
 			} else if (player.cardsValue == dealer.cardsValue) {
 				if (player.cardCount < dealer.cardCount) {
-					System.out.println("Dealer is showing " + dealer.cardsValue);
+					System.out.print("Player is showing " + player.cardsValue + ": ");
+					player.printHand();
+					System.out.print("Dealer is showing " + dealer.cardsValue + ": ");
+					dealer.printHand();
 					System.out.println("You WIN!");
 					player.money += bet;
 				} else if (player.cardCount > dealer.cardCount){
-					System.out.println("Dealer is showing " + dealer.cardsValue);
+					System.out.print("Player is showing " + player.cardsValue + ": ");
+					player.printHand();
+					System.out.print("Dealer is showing " + dealer.cardsValue + ": ");
+					dealer.printHand();
 					System.out.println("You LOST!");
 					player.money -= bet;
 				} else {
-					System.out.println("Dealer is showing " + dealer.cardsValue);
+					System.out.print("Player is showing " + player.cardsValue + ": ");
+					player.printHand();
+					System.out.print("Dealer is showing " + dealer.cardsValue + ": ");
+					dealer.printHand();
 					System.out.println("It's a tie.");
 				}
 			}
 		}
-		System.out.println();
 		System.out.println();
 		resetGame(player, dealer);
 	}
