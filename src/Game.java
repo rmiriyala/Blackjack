@@ -9,6 +9,7 @@ public class Game {
 		while (player.money != 0) {
 			Deck deck = new Deck();
 			deck.shuffle();
+//			deck.stack();
 			int bet = 0;
 			
 			System.out.println("You have " + player.money + ". How much do you want to bet?");
@@ -42,43 +43,44 @@ public class Game {
 			if (player.checkBlackjack() == true) {
 				player.money += 1.5 * bet;
 				System.out.println("Blackjack! You WIN!");
+				System.out.println();
 				resetGame(player, dealer);
-			}
-
-			//should never be true, but resets possible errors
-			if (player.isBusted() == true) {
-				System.out.println("GAME IS BROKEN");
-				resetGame(player, dealer);
-
-			}
-			System.out.println("Showing: " + player.cardsValue);
-			System.out.println();
-			System.out.println("Would you like to HIT or STAY?");
-			
-			sc = new Scanner(System.in);
-			String userInput = sc.next().toLowerCase();
-			
-			//handles user's hit options
-			while(userInput.equals("stay") == false) {
-				if (userInput.equals("hit")) {
-					System.out.println();
-					player.dealCard(deck);
-					if (player.isBusted() == true) { break; }
+			} else {
+				//should never be true, but resets possible errors
+				if (player.isBusted() == true) {
+					System.out.println("GAME IS BROKEN");
+					resetGame(player, dealer);
 				}
+				
 				System.out.println("Showing: " + player.cardsValue);
 				System.out.println();
 				System.out.println("Would you like to HIT or STAY?");
+				
 				sc = new Scanner(System.in);
-				userInput = sc.next().toLowerCase();
+				String userInput = sc.next().toLowerCase();
+				
+				//handles user's hit options
+				while(userInput.equals("stay") == false) {
+					if (userInput.equals("hit")) {
+						System.out.println();
+						player.dealCard(deck);
+						if (player.isBusted() == true) { break; }
+					}
+					System.out.println("Showing: " + player.cardsValue);
+					System.out.println();
+					System.out.println("Would you like to HIT or STAY?");
+					sc = new Scanner(System.in);
+					userInput = sc.next().toLowerCase();
+				}
+				
+				//dealer logic proceeds according to specs in the dealer class
+				while (dealer.limitReached != true) { dealer.action(deck); }
+				
+				//once all actions are done, determines a winner and readies next hand
+				winner(player, dealer, bet);
 			}
-			
-			//dealer logic proceeds according to specs in the dealer class
-			while (dealer.limitReached != true) { dealer.action(deck); }
-			
-			//once all actions are done, determines a winner and readies next hand
-			winner(player, dealer, bet);
-		}
-		System.out.println("You have $0. GAMER OVER!");
+			}
+		System.out.println("You have $0. GAME OVER!");
 	}
 	
 	//reset all the single game variables
@@ -100,7 +102,6 @@ public class Game {
 	}
 	
 	public static void winner(Player player, Dealer dealer, int bet) {
-		System.out.println();
 		if (player.isBusted()) {
 			System.out.println("Player is showing " + player.cardsValue + ".");
 			System.out.println("You BUSTED!");

@@ -46,9 +46,10 @@ public class Dealer {
 	}
 	
 	public void printHand() {
+		System.out.print("Dealer: ");
 		for (int i = 0; i < this.cardCount - 1; i++) {
 			System.out.print(this.hand[i].toString() + ", ");
 		}
-		System.out.println("Dealer: " + this.hand[this.cardCount - 1].toString() + ".");
+		System.out.println(this.hand[this.cardCount - 1].toString() + ".");		
 	}
 }

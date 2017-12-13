@@ -34,6 +34,12 @@ public class Deck {
 	}
 	
 	/**
+	 * Designed to showcase player Blackjack functionality.
+	 */
+	public void stack() {
+		this.deck[2] = new Card("King", "Clubs");
+	}
+	/**
 	 * Will deal a card to whatever player requests the card.
 	 * @return the first card on the pile.
 	 */
