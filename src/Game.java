@@ -18,8 +18,8 @@ public class Game {
 
 		while (player.money != 0) {
 			Deck deck = new Deck();
-			deck.shuffle();
-			//			deck.stack();
+//			deck.shuffle();
+		    deck.stack();
 			int bet = 0;
 
 			System.out.println("You have " + player.money + ". How much do you want to bet?");
