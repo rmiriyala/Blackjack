@@ -1,4 +1,11 @@
 
+/**
+ * Player class to house the cash and cards the player may have.
+ * Also created utility functions, such as printHand().
+ * 
+ * @author Rahul
+ *
+ */
 public class Player {
 	private static final int DEFAULT_CASH = 1000;
 	

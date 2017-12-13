@@ -1,4 +1,9 @@
-
+/**
+ * Card class for each individual card object.
+ * 
+ * @author Vivek, Rahul
+ *
+ */
 public class Card {
 	private String rank; //represents the rank of a card
 	private String suit; //represents the suit of a card

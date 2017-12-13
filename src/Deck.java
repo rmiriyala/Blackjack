@@ -1,5 +1,11 @@
 import java.util.*;
 
+/**
+ * Creates a standard playing deck of 52 cards to use for the game blackjack.
+ * 
+ * @author Rahul
+ *
+ */
 public class Deck {
 	public Card[] deck = new Card[52];
 	
@@ -61,6 +67,9 @@ public class Deck {
 		return first;
 	}
 	
+	/**
+	 * Utility/Debug function to print the deck.
+	 */
 	public void print() {
 		for (int i = 0; i < this.deck.length; i++) {
 			System.out.println(this.deck[i].toString());

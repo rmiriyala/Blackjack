@@ -1,7 +1,17 @@
 import java.util.*;
 
+/**
+ * A class to Implement the other classes, creating a Blackjack game.
+ * 
+ * @author Rahul, Vivek
+ *
+ */
 public class Game {
 
+	/**
+	 * Driver program for the Blackjack Game.
+	 * @param args - default param for public static void main
+	 */
 	public static void main(String[] args) {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
@@ -83,7 +93,11 @@ public class Game {
 		System.out.println("You have $0. GAME OVER!");
 	}
 	
-	//reset all the single game variables
+	/**
+	 * Prepares the game for the next hand, updating money in the process.
+	 * @param player - the user playing the game
+	 * @param dealer - the dealer A.I. created to play against
+	 */
 	public static void resetGame(Player player, Dealer dealer) {
 		player.cardCount = 0;
 		dealer.cardCount = 0;
@@ -101,6 +115,12 @@ public class Game {
 		dealer.hand = new Card[12];
 	}
 	
+	/**
+	 * Checks for a winner, displays a message, then calls resetGame().
+	 * @param player - the player playing Blackjack
+	 * @param dealer - the dealer
+	 * @param bet - the amount that was wagered on this particular hand
+	 */
 	public static void winner(Player player, Dealer dealer, int bet) {
 		if (player.isBusted()) {
 			System.out.println("Player is showing " + player.cardsValue + ".");
