@@ -22,6 +22,10 @@ public class Player {
 		this.money = DEFAULT_CASH;
 	}
 	
+	/**
+	 * dealCard is a void method which deals the cards to the player and dealer
+	 * @param deck is the parameter which deals the cards of the deck.
+	 */
 	public void dealCard(Deck deck) {
 		Card newCard = deck.dealCard();
 		if (newCard.getRank().equalsIgnoreCase("Ace")) {
@@ -33,6 +37,9 @@ public class Player {
 		this.printHand();
 	}
 	
+	/**
+	 * checkBlackjack method checks if the player got a natural blackjack.
+	 */
 	public boolean checkBlackjack() {
 		if (this.cardsValue == 21) {
 			return true;
@@ -40,6 +47,9 @@ public class Player {
 		return false;
 	}
 	
+	/**
+	 * isBusted method checks if the dealer or player and returns boolean.
+	 */
 	public boolean isBusted() {
 		if (this.cardsValue > 21 && this.aceCount == 0) {
 			return true;
@@ -50,6 +60,9 @@ public class Player {
 		return false;
 	}
 	
+	/**
+	 * printHand will print card value that is dealt to the player or dealer.
+	 */
 	public void printHand() {
 		if (this.cardCount > 1) {
 			System.out.print("Your hand: ");
