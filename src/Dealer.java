@@ -13,14 +13,18 @@ public class Dealer {
 	public int cardCount = 0;
 	public boolean limitReached = false;
 	public Card[] hand = new Card[12];
-	
+
+	/**
+	 * blackjack holds the value of 21
+	 */
+	public static final int blackjack = 21;
 	/**
 	 * Empty constructor, never used.
 	 */
 	public Dealer() {
-		
+
 	}
-	
+
 	/**
 	 * Creates a dealer, given a certain deck
 	 * @param deck - the deck of 52 cards to be used.
@@ -37,21 +41,21 @@ public class Dealer {
 			this.printHand();
 		}
 	}
-	
+
 	/**
 	 * Function to check whether or not the dealer has truly busted.
 	 * @return - true if the dealer has busted, false otherwise.
 	 */
 	public boolean isBusted() {
-		if (this.cardsValue > 21 && this.aceCount == 0) {
+		if (this.cardsValue > blackjack && this.aceCount == 0) {
 			return true;
-		} else if (this.cardsValue > 21 && this.aceCount > 0) {
+		} else if (this.cardsValue > blackjack && this.aceCount > 0) {
 			this.aceCount--;
 			this.cardsValue -= 10;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Represents the dealer logic and is called by the Game class.
 	 * @param deck - the deck that will be used to deal the dealer cards.
@@ -66,7 +70,7 @@ public class Dealer {
 		}
 		this.limitReached = true;
 	}
-	
+
 	/**
 	 * Utility function to print the dealer's hand.
 	 */

@@ -15,17 +15,17 @@ public class Game {
 	public static void main(String[] args) {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
-		
+
 		while (player.money != 0) {
 			Deck deck = new Deck();
 			deck.shuffle();
-//			deck.stack();
+			//			deck.stack();
 			int bet = 0;
-			
+
 			System.out.println("You have " + player.money + ". How much do you want to bet?");
 			Scanner sc = new Scanner(System.in);
 			int betAmount = sc.nextInt();
-			
+
 			boolean betIsValid = false;
 			while (betIsValid == false) { 
 				if (betAmount <= 0) {
@@ -48,7 +48,7 @@ public class Game {
 			player.dealCard(deck);
 			dealer.dealCard(deck);
 			player.dealCard(deck);
-			
+
 			//check for blackjack
 			if (player.checkBlackjack() == true) {
 				player.money += 1.5 * bet;
@@ -61,14 +61,14 @@ public class Game {
 					System.out.println("GAME IS BROKEN");
 					resetGame(player, dealer);
 				}
-				
+
 				System.out.println("Showing: " + player.cardsValue);
 				System.out.println();
 				System.out.println("Would you like to HIT or STAY?");
-				
+
 				sc = new Scanner(System.in);
 				String userInput = sc.next().toLowerCase();
-				
+
 				//handles user's hit options
 				while(userInput.equals("stay") == false) {
 					if (userInput.equals("hit")) {
@@ -82,17 +82,17 @@ public class Game {
 					sc = new Scanner(System.in);
 					userInput = sc.next().toLowerCase();
 				}
-				
+
 				//dealer logic proceeds according to specs in the dealer class
 				while (dealer.limitReached != true) { dealer.action(deck); }
-				
+
 				//once all actions are done, determines a winner and readies next hand
 				winner(player, dealer, bet);
 			}
-			}
+		}
 		System.out.println("You have $0. GAME OVER!");
 	}
-	
+
 	/**
 	 * Prepares the game for the next hand, updating money in the process.
 	 * @param player - the user playing the game
@@ -103,7 +103,7 @@ public class Game {
 		dealer.cardCount = 0;
 		Deck deck = new Deck();
 		deck.shuffle();
-		
+
 		player.cardCount = 0;
 		dealer.cardCount = 0;
 		player.cardsValue = 0;
@@ -114,7 +114,7 @@ public class Game {
 		player.hand = new Card[12];
 		dealer.hand = new Card[12];
 	}
-	
+
 	/**
 	 * Checks for a winner, displays a message, then calls resetGame().
 	 * @param player - the player playing Blackjack

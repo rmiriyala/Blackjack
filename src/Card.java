@@ -10,14 +10,24 @@ public class Card {
 	private int value; //represents the value of a card
 	public static String[] ranks = {"Ace","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Jack","Queen","King"};
 	public static String[] suits = {"Clubs","Diamonds","Hearts","Spades"};
+
+	/**
+	 * ace holds the value of 11
+	 */
+	public static final int ace = 11;
+	
+	/**
+	 * faceCard holds the value of 10
+	 */
+	public static final int faceCard = 10;
 	
 	/**
 	 * Empty constructor.
 	 */
 	public Card(){
-		
+
 	}
-	
+
 	/**
 	 * Two parameter constructor for Card class.
 	 * @param suit - the suit of the card; can be "Clubs","Diamonds","Hearts", or "Spades".
@@ -25,16 +35,16 @@ public class Card {
 	 */
 	public Card(String rank, String suit)
 	{
-	    this.rank = rank.toUpperCase();
-	    for (int i = 0; i < ranks.length; i++) {
-	    	if (rank.equalsIgnoreCase(ranks[i])) {
-	    		this.value = getRealValue(i);
-	    	}
-	    }
-	    
-	    this.suit = suit.toUpperCase();
+		this.rank = rank.toUpperCase();
+		for (int i = 0; i < ranks.length; i++) {
+			if (rank.equalsIgnoreCase(ranks[i])) {
+				this.value = getRealValue(i);
+			}
+		}
+
+		this.suit = suit.toUpperCase();
 	}
-	
+
 	/**
 	 * Copy constructor of another card.
 	 * @param  - card the card to duplicate
@@ -44,7 +54,7 @@ public class Card {
 		this.suit = card.suit;
 		this.value = card.value;
 	}
-	
+
 	/**
 	 * Overrides Default Object toString method
 	 */
@@ -53,28 +63,28 @@ public class Card {
 		if (this.equals(null)) {
 			return "null";
 		}
-		
-	    return this.rank + " of " + this.suit;
+
+		return this.rank + " of " + this.suit;
 	}
-	
+
 	/**
 	 * Gets the rank of the card;
 	 * @return the rank of the card.
 	 */
 	public String getRank()
 	{
-	    return this.rank;
+		return this.rank;
 	}
-	
+
 	/**
 	 * Gets the suit of the card.
 	 * @return the suit of the card.
 	 */
 	public String getSuit()
 	{
-	    return this.suit;
+		return this.suit;
 	}
-	
+
 	/**
 	 * Helper function gets the real value of the card: 2 - 11;
 	 * @return the real blackjack value of the card.
@@ -82,17 +92,17 @@ public class Card {
 	public int getRealValue(final int i)
 	{
 		int realValue = 0;
-	    if (i + 1 >= 10) {
-	    	realValue = 10; //face cards are all 10
-	    } else if (i == 0) {
-	        realValue = 11; //ace starts at 11 
-	    } else {
-	        realValue = i + 1;
-	    }
-	    
-	    return realValue;
+		if (i + 1 >= faceCard) {
+			realValue = faceCard; //face cards are all 10
+		} else if (i == 0) {
+			realValue = ace; //ace starts at 11 
+		} else {
+			realValue = i + 1;
+		}
+
+		return realValue;
 	}
-	
+
 	/**
 	 * Getter method for card value.
 	 * @return the blackjack value of the card.
@@ -100,14 +110,14 @@ public class Card {
 	public int getValue() {
 		return this.value;
 	}
-	
+
 	/**
 	 * Sets the value of the card.
 	 * @param set - the value to set the card to.
 	 */
 	public void setValue(int value)
 	{
-	    this.value = value;
+		this.value = value;
 	}
-	
+
 }

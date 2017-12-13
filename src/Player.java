@@ -8,20 +8,25 @@
  */
 public class Player {
 	private static final int DEFAULT_CASH = 1000;
-	
+
 	public int money;
 	public int cardCount = 0;
 	public int cardsValue;
 	public int aceCount;
 	public Card[] hand = new Card[12];
-	
+	/**
+	 * blackjack holds the value of 21
+	 */
+	public static final int blackjack = 21;
+
+
 	/**
 	 * Empty player constructor, with default cash given to the new player.
 	 */
 	public Player() {
 		this.money = DEFAULT_CASH;
 	}
-	
+
 	/**
 	 * dealCard is a void method which deals the cards to the player and dealer
 	 * @param deck is the parameter which deals the cards of the deck.
@@ -36,30 +41,30 @@ public class Player {
 		this.cardsValue += newCard.getValue();
 		this.printHand();
 	}
-	
+
 	/**
 	 * checkBlackjack method checks if the player got a natural blackjack.
 	 */
 	public boolean checkBlackjack() {
-		if (this.cardsValue == 21) {
+		if (this.cardsValue == blackjack) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * isBusted method checks if the dealer or player and returns boolean.
 	 */
 	public boolean isBusted() {
-		if (this.cardsValue > 21 && this.aceCount == 0) {
+		if (this.cardsValue > blackjack && this.aceCount == 0) {
 			return true;
-		} else if (this.cardsValue > 21 && this.aceCount > 0) {
+		} else if (this.cardsValue > blackjack && this.aceCount > 0) {
 			this.aceCount--;
 			this.cardsValue -= 10;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * printHand will print card value that is dealt to the player or dealer.
 	 */
